@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Presencebot</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/blink.css" />
+        <script type="text/javascript" src="/easyrtc/easyrtc.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="js/bot.js"></script>
+        <script type="text/javascript">
+          var selfEasyrtcid = "libbybot";
+          var theroom = window.location.hash.substr(1);
+        </script>
+        <style>
+          #box1{
+             width:600px;
+          }
+          #offair{
+             font-size:10em;color:red;font-weight:bold;
+             text-align:center;
+             padding:10px;
+          }
+          #onair{
+             font-size:3em;color:red;font-weight:bold;
+             padding:10px;
+          }
+          #room{
+             padding:10px;
+          }
+          #box0{
+             width:100px;
+          }
+          #box2{
+             width:100px;
+          }
+          #box3{
+             width:100px;
+          }
+        </style>
+    </head>
+
+    <body onload="appInit()" style="background-color:black;">
+        <div class="fullpage">
+            <div class="onair" id="onair" style="display:none;">
+              <p id="blink">ON AIR</blink></p>
+              <p id="room">Room id</p>
+              <p id="num_peers"></p>
+              <br />
+              <video id="box0" class="transit boxCommon thumbCommon easyrtcMirror" muted="muted" volume="0" style="display:none"></video>
+            </div>
+
+            <div id="offair"><p>OFF AIR</p></div>
+            <video id="box1" class="transit boxCommon thumbCommon" style="display:none"></video>
+            <video id="box2" class="transit boxCommon thumbCommon" style="display:none"></video>
+            <video id="box3" class="transit boxCommon thumbCommon" style="display:none"></video>
+        </div>
+    </body>
+</html>

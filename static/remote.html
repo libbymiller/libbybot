@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Remote presence bot client</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+        <script type="text/javascript" src="/easyrtc/easyrtc.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="js/remote.js"></script>
+        <script type="text/javascript">
+          function getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+          var selfEasyrtcid = "person_"+getRandomIntInclusive(1000,9999);
+          var theroom = window.location.hash.substr(1);
+          console.log(theroom);
+var mic_on = true;
+
+function toggle_mic(){
+  console.log("foooo");
+  if(mic_on == true){
+    //easyrtc.enableAudio(false);
+    easyrtc.enableMicrophone(false);
+    document.getElementById("mic").innerHTML = "Mic is OFF";
+    mic_on = false;
+    console.log("mic is now OFF");
+  }else{
+    easyrtc.enableMicrophone(true);
+    document.getElementById("mic").innerHTML = "Mic is ON";
+    mic_on = true;
+    console.log("mic is now ON");
+  }
+}
+        </script>
+        <style type="text/css">
+          #mic{
+             font-size:10em;color:white;font-weight:bold;
+             padding:10px;
+          }
+
+#box0{
+  width: 100px;float:right;
+}
+#box1{
+  width: 100px;float:right;
+}
+#box2{
+  width: 100px;float:right;
+}
+#box3{
+  width: 100px;float:right;
+}
+#offair{
+  font-size:10em;
+  color:red;
+  text-align:center;
+}
+.subtext{
+  font-size:2em;
+  color:red;
+  text-align:center;
+}
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: red;
+}
+
+a:hover {
+    color: hotpink;
+}
+
+a:active {
+    color: red;
+}
+
+        </style>
+    </head>
+
+    <body onload="appInit()" style="background-color:black;">
+        <div id="fullpage"  class="boxCommon">
+
+            <div class="onair" id="onair" style="display:none;"><p><blink>ON AIR</blink></p></div>
+            <div id="room" style="display:none;"><p>Room id</p></div>
+            <p id="num_peers"></p>
+            <div id="offair"><p>OFF AIR</p></div>
+            <video id="box0" class="transit boxCommon thumbCommon easyrtcMirror" muted="muted" volume="0" width="100px"></video>
+            <video id="box1" class="transit boxCommon thumbCommon" style="display:none"></video>
+            <video id="box2" class="transit boxCommon thumbCommon" style="display:none"></video>
+            <video id="box3" class="transit boxCommon thumbCommon" style="display:none"></video>
+        </div>
+            <div onclick="toggle_mic();" id="mic">Mic is ON</div>
+    </body>
+</html>
